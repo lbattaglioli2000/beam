@@ -17,7 +17,6 @@ return [
      * --------------------------------------------------------------------------
      * This ID can be found in the Beam dashboard, within your Project settings.
      * Your project ID is used to identify which project you want to beam data to.
-     *
      */
-    'project_id' => env('BEAM_PROJECT_ID')
+    'project_id' => env('BEAM_PROJECT_ID'),
 ];

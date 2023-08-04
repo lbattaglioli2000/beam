@@ -4,13 +4,12 @@ namespace RayBeam\Beam\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Env;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
 class InitializeBeamCommand extends Command
 {
     public $signature = 'beam:init';
+
     public $description = 'Sets up the Beam package for use in your Laravel application.';
 
     public function handle(): int
@@ -23,12 +22,13 @@ class InitializeBeamCommand extends Command
 
         if (! $token) {
             $this->error('Unable to log into Beam. Please try again!');
+
             return self::FAILURE;
         }
 
         file_put_contents(
             base_path('.env'),
-            PHP_EOL . "BEAM_API_TOKEN=$token" . PHP_EOL,
+            PHP_EOL."BEAM_API_TOKEN=$token".PHP_EOL,
             FILE_APPEND
         );
 
@@ -36,10 +36,10 @@ class InitializeBeamCommand extends Command
         if ($projects->isEmpty()) {
             $this->info('You have no projects!');
             $this->line('You can create a new project at any point from the Beam dashboard. Once you have created a project, you can run this command again to select it.');
+
             return self::SUCCESS;
         }
         $projectId = $this->selectProjectId($projects);
-
 
         // Get all the User's Projects
         // $projects = collect(Http::withToken($token)->get('/api/projects')->json());
@@ -58,7 +58,8 @@ class InitializeBeamCommand extends Command
         return self::SUCCESS;
     }
 
-    private function login(string $email, string $password): string|false {
+    private function login(string $email, string $password): string|false
+    {
         $response = Http::acceptJson()
             ->post('http://beam.test/api/v1/login', [
                 'email' => $email,
@@ -75,7 +76,8 @@ class InitializeBeamCommand extends Command
         return false;
     }
 
-    private function selectProjectId(Collection $projects): string {
+    private function selectProjectId(Collection $projects): string
+    {
         $project = $this->choice('Select a project', $projects->pluck('id')->toArray());
 
         return $projects->firstWhere('name', $project)['id'];

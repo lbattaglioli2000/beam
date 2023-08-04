@@ -2,11 +2,9 @@
 
 namespace RayBeam\Beam;
 
-use Illuminate\Support\Facades\Http;
+use RayBeam\Beam\Commands\InitializeBeamCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use RayBeam\Beam\Commands\InitializeBeamCommand;
-use Spatie\Ray\Ray;
 
 class BeamServiceProvider extends PackageServiceProvider
 {

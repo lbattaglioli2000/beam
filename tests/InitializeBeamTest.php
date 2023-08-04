@@ -2,12 +2,10 @@
 
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Env;
-use Illuminate\Support\Facades\Http;
 
 /**
  * @var TestCase $this
  */
-
 it('can login to Beam API', function () {
     file_put_contents(base_path('.env'), null);
 
