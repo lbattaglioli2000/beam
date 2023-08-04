@@ -1,12 +1,14 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace RayBeam\Beam;
 
+use Illuminate\Support\Facades\Http;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use RayBeam\Beam\Commands\InitializeBeamCommand;
+use Spatie\Ray\Ray;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class BeamServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +18,8 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('beam')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasCommands(InitializeBeamCommand::class);
     }
 }
